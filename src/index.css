@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'Avenir Next';
+  /* src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2729/AvenirNext_Variable.ttf') format('truetype'); */
+  src: url('./assets/fonts/avenir_ff/AvenirLTStd-Roman.otf') format('truetype');
+}
+
+
+body {
+  font-family: "Avenir Next";
+}
+
+.tpoCat {
+  transform: scale(1);
+}
+
+.centered-element {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.centered-element2 {
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+/* py-1 bg-red-500 px-5 border absolute cursor-pointer */
+.logoutbtn {
+  display: none;
+  position: absolute;
+  background: #FFF;
+  z-index: 200;
+}
+
+.logout:hover .logoutbtn {
+  display: block;
+  transform: scaleY(1);
+}
+
+/* navbar css */
+/* text-left md:p-0  md:hover:text-blue-600  cursor-pointer p-2 */
+.my-ul li {
+  text-align: left;
+  cursor: pointer;
+  padding: 8px 8px;
+}
+
+/* navbar css */
+.userinfo div {
+  /* font-[Avenir] border p-4 font-[400] cursor-pointer text-[12px] md:text-[16px] */
+  font-family: "Avenir Next";
+  cursor: pointer;
+  font-size: 16px;
+  padding: 12px 12px;
+  font-weight: 400;
+
+}
+
+.showBtn {
+  transition: all 1s;
+}
+
+@media screen and (width > 700px) {
+  .showBtn0:hover .showBtn {
+    margin-top: 350px;
+  }
+}
+
+@media screen and (width > 700px) {
+  .showBtn0:hover .showBtn {
+    margin-top: 270px;
+  }
+}
+
+@media screen and (width < 700px) {
+  .showBtn0:hover .showBtn {
+    margin-top: 178px;
+  }
+}
+
+.borderR {
+  border-left: none;
+}
+
+.footer ul li:hover {
+  color: orange;
+  cursor: pointer;
+}
+
+.toptex {
+  font-weight: bolder;
+}
+
+.BEST ul li:hover {
+  font-weight: 600;
+  color: rgb(157, 136, 172);
+}
+
+.collaps {
+  height: 0px;
+  transition: all 0.5s;
+}
+
+.openCollapse {
+  height: auto;
+}
+
+.OurBtn button:hover {
+  background: black;
+  color: white;
+}
+
+.prev {
+  color: red;
+  z-index: 100;
+}
+
+.filter {
+  display: block;
+  position: absolute;
+  width: 80%;
+  height: auto;
+  z-index: 20;
+  margin: auto;
+}
+
+@media screen and (max-width:550px) {
+  .filterContainer {
+    position: absolute;
+    overflow: hidden;
+    left: -500px;
+    width: 90%;
+    height: 0%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+    display: block;
+    transition: all 1s;
+  }
+}
+
+.filterBtn {
+  width: 60px;
+  height: 60px;
+  left: 10px;
+  border-radius: 50%;
+}
+
+.widthq {
+  position: absolute;
+  overflow: hidden;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  display: block;
+}
+
+.first {
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  border-radius: 50%;
+}
+
+.increament {
+  background: #f7f5f7;
+}
+
+.increament button {
+  padding: 4px 4px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* user info */
+.history {
+  display: none;
+  transition: all 0.5s;
+}
+
+.wallet {
+  display: none;
+  transition: all 0.5s;
+}
+
+.info {
+  display: none;
+  transition: all 0.5s;
+}
+
+.activeuser {
+  display: block;
+}
+
+.active_u {
+  background-color: #FFF;
+}
+
+/* user info */
+/* about us secssion */
+.sec-1 {
+  background: white;
+  color: black;
+  transition: all 0.5s;
+}
+
+.sec-2 {
+  background: white;
+  color: black;
+  transition: all 0.5s;
+}
+
+.sec-3 {
+  background: white;
+  color: black;
+  transition: all 0.5s;
+}
+
+.active-cecsion {
+  background: #030211;
+  color: #FFF;
+}
+
+/* about us secssion */
+
+/* color selected */
+.selectedColor {
+  background: transparent;
+  opacity: 1;
+}
+
+.colorselected {
+  background: transparent;
+  opacity: 1;
+}
+
+/* color selected */
+/* scroll to top button */
+.scrollTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 4px;
+  z-index: 100;
+  color: #fff;
+  display: none;
+  border-radius: 5px;
+  background: orangered;
+  transition: all 2s;
+}
+
+.showbtn {
+  display: block;
+}
+
+/* scroll to top button */
+.main-container {
+  width: 100%;
+  font-family: 'Avenir Next';
+  /* font-family: "Avenir Next Variable", sans-serif;; */
+}
+
+/* shiping */
+/* .dots::after{
+  content: "_________________";
+  display: inline-flex;
+} */
+/* shiping */
+@media screen and (min-width:320px) {
+  .toptex {
+    font-size: 35px;
+  }
+
+  .tpoCat {
+    width: 170px;
+  }
+
+  .topcartbox {
+    width: 97%;
+    margin: auto;
+  }
+
+  .besulli {
+    font-size: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .bstcart {
+    width: 150px;
+  }
+
+  .categoryC {
+    width: 100%;
+  }
+
+  .category {
+    width: 150px;
+  }
+
+  .PymLike {
+    width: 153px;
+  }
+}
+
+/* trackOrder */
+.trackOrder {
+  width: 70%;
+  height: 80%;
+  background-color: #f7f5f7;
+}
+
+/* h-[100%] bg-green-600 w-[100%] */
+.pograss-bar {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(30, 239, 110);
+  animation: pogras 1s;
+}
+
+.pogras-bar {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(30, 239, 110);
+  animation: pograss 1s 1s;
+}
+
+.selectedSize{
+  background: #030211;
+  color: #f7f5f7;
+}
