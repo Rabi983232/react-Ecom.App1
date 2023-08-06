@@ -1,10 +1,16 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchNavItems } from '../features/navreducer/navreducer';
+import { useEffect } from 'react';
 
 
 export default function ShippingPolicy() {
-
+    const dispetch = useDispatch()
+    useEffect(() => {
+        dispetch(fetchNavItems())
+    }, [])
     return (
         <div className='w-[100%]'>
             <Navbar />

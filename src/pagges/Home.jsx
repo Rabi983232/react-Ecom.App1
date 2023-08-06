@@ -5,12 +5,12 @@ import Category from '../components/Category'
 import TopCategory from '../components/TopCategory'
 import Banner2 from '../components/Banner2'
 import New_in from '../components/New_in'
-import Footer from '../components/Footer'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchNavItems } from '../features/navreducer/navreducer';
 import { fetchProducts, fetchProductsByCategoryAndP_id } from '../features/productreducer/productSlice';
 import { fetchBannerImages } from '../features/Banner/BannerReducer'
-import { useDispatch, useSelector } from 'react-redux'
 import { RingLoader } from 'react-spinners';
+import Footer from '../components/Footer'
 
 export default function Home() {
   const dispetch = useDispatch()
@@ -31,17 +31,19 @@ export default function Home() {
               <Banner />
               <Category />
               <TopCategory />
+              <Banner2 />
             </div>
-            <Banner2 />
-            <New_in />
-            <Footer />
+              <New_in />
+              <Footer />
           </>
         ) : (
-          <div className='w-[100%] h-[100vh] relative'>
-            <div className='centered-element'>
-              <RingLoader color="#36d7b7"/>
-            </div>
-          </div>
+          <>
+          {/* // <div className='w-[100%] h-[100vh] relative'>
+          //   <div className='centered-element'>
+          //     <RingLoader color="#36d7b7" />
+          //   </div>
+          // </div> */}
+          </>
         )
       }
     </>

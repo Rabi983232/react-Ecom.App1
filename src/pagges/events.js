@@ -80,11 +80,15 @@ export const btnTop = () => {
   window.addEventListener("scroll", () => {
     var pos = window.pageYOffset;
     if (pos > 500) {
+      const setNav = document.querySelector(".top");
       const btn = document.getElementsByClassName("scrollTop");
       btn[0].classList.add("showbtn");
+      setNav.classList.add("fixedNav");
     } else if (pos < 500) {
       const btn = document.getElementsByClassName("scrollTop");
       btn[0].classList.remove("showbtn");
+      const setNav = document.querySelector(".top");
+      setNav.classList.remove("fixedNav");
     }
   });
 };

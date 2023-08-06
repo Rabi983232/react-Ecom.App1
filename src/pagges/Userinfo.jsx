@@ -35,13 +35,18 @@ export default function Userinfo() {
         console.log(orderedList.items)
         console.log(data)
     }
+    const [cardprodImg,setCPDIMG] = useState()
+const handleSeeAllUpdates=(imgUrRl)=>{
+    setCPDIMG(imgUrRl)
+    setShow('block')
 
+}
     return (
         <>
             <div onClick={() => setShow('hidden')} className={`w-[100vw] ${show} h-[100%] fixed bg-[rgba(0,0,0,0.5)] z-[1000]`}>
                 <div className='w-[100%] h-[100%] relative'>
                     <div className='centered-element2 trackOrder flex justify-around'>
-                        <div className='w-[50%] block h-auto py-10'>
+                        <div className='md:w-[50%] block h-auto py-10'>
                             <div className='w-[15px] h-[15px] rounded-full bg-[rgb(30,239,110)] border relative mx-5'>
                                 <div className='absolute ml-[15px] w-[500px] mt-[-10px] h-[130px] '>
                                     <div className='px-2 py-1 text-xl font-[530]'>Order Confirmed</div>
@@ -72,7 +77,7 @@ export default function Userinfo() {
                         </div>
                         <div className='w-[45%] h-[100%]'>
                             <div className='w-[70%] h-[70%] mt-[40px]'>
-                                <img className='w-[100%] h-[100%]' src={`https://s3.ap-south-1.amazonaws.com/cdn.creativeswag.in/Product+Images/Essentials/Raincoat/ESNTL_RC_MFLRC_SLD_BLK.jpg`} alt="" srcset="" />
+                                <img className='w-[100%] h-[100%]' src={cardprodImg} alt="" srcset="" />
                             </div>
                         </div>
                     </div>
@@ -153,7 +158,6 @@ export default function Userinfo() {
                                                             {
                                                                 orderedList.items.length > 0 ? (
                                                                     orderedList.items.map((i) => {
-
                                                                         let date = new Date(i.createdAt);
 
                                                                         return (
@@ -176,7 +180,7 @@ export default function Userinfo() {
                                                                                         <div>
                                                                                             <div className='text-gray-500 md:text-base text-xs'>Order Status</div>
                                                                                             <button
-                                                                                                className='text-green-500 border border-green-400 rounded px-2 h-[32px] md:h-[25px] bg-green-100 md:mr-2'>
+                                                                                                className='md:text-lg text-xs text-green-500 border border-green-400 rounded px-2 h-[32px] md:h-[25px] bg-green-100 md:mr-2'>
                                                                                                 {i.orderStatus.orderStatus}
                                                                                             </button>
                                                                                         </div>
@@ -194,7 +198,7 @@ export default function Userinfo() {
                                                                                         <div className=' text-center'>
                                                                                             <div className=''>Quantity</div>
                                                                                         </div>
-                                                                                        <div className=' text-center'>
+                                                                                        <div className='col-span-2 text-center'>
                                                                                             <div className=''>Amount</div>
                                                                                         </div>
                                                                                         {/* <div className=' text-start'>
@@ -226,7 +230,7 @@ export default function Userinfo() {
                                                                                                         <div className=' text-center'>
                                                                                                             <div className='font-bold'>{product.quantity}</div>
                                                                                                         </div>
-                                                                                                        <div className=' text-center'>
+                                                                                                        <div className='col-span-2 text-center'>
                                                                                                             <div className='font-bold'>₹ {product.price}</div>
                                                                                                         </div>
                                                                                                         {/* <div className='flex text-left'>
@@ -241,11 +245,11 @@ export default function Userinfo() {
                                                                                                 )
                                                                                             })
                                                                                         }
-                                                                                        <div className='float-center'>
+                                                                                        <div className='float-right'>
                                                                                             <div className='mt-[55px]'>
                                                                                                 <button
-                                                                                                    onClick={() => setShow('block')}
-                                                                                                    className='border p-2 rounded'>
+                                                                                                    onClick={() =>handleSeeAllUpdates(i.cartMaster.carts[0].image)}
+                                                                                                    className='border bg-yellow-500 text-white p-2 rounded'>
                                                                                                     See All Updates
                                                                                                 </button>
                                                                                             </div>

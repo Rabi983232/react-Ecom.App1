@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchOrderedLists } from '../features/orderList/orderListReducer';
 import { publicRequest } from '../axios/axios';
+import navIMG from '../assets/iamges/Asset 1@300x.png'
 
 
 export default function Navbar() {
@@ -95,7 +96,7 @@ export default function Navbar() {
     }
     useEffect(() => {
         if (ADD_Cart_ID) {
-            dispetch(fetchCartItems(ADD_Cart_ID.cartId)).then((res)=>{
+            dispetch(fetchCartItems(ADD_Cart_ID.cartId)).then((res) => {
                 console.log(res.payload.length)
             })
             // publicRequest.post(`carts/getCartItems`, {
@@ -114,15 +115,16 @@ export default function Navbar() {
         const re = dispetch(fetchNavItems())
         Promise.all([re]).then((res) => {
             navigate(`/userinfo`)
+            Toggle('add')
         })
     }
     const cartCount = useSelector(state => state.cartItems)
-    useEffect(()=>{
+    useEffect(() => {
         setCallCart(cartCount.items.length)
-    },[cartCount])
+    }, [cartCount])
     return (
         <>
-            <div className="w-100 h-[10px] flex justify-between bg-black">
+            {/* <div className="w-100 h-[10px] flex justify-between bg-black">
                 <div className='w-[50%] h-[100%] text-right pt-[10px] text-xl pr-[8px] text-white'>
 
                 </div>
@@ -130,13 +132,15 @@ export default function Navbar() {
                 <div className='w-[50%] h-[100%] text-left pt-[10px] text-xl pl-[8px] text-white'>
 
                 </div>
-            </div>
-            <div id='top' className='w-[100%] h-auto bg-[#f7f5f7]'>
+            </div> */}
+            <div id='' className='top w-[100%] h-auto bg-[#f7f5f7]'>
                 <nav className='w-[90%] mx-auto h-[auto] bg-[#f7f5f7] flex flex-wrap relative md:justify-evenly'>
                     <div className="logo text-3xl cursor-pointer p-3 font-[1000]">
                         <a
                             onClick={() => navigetTo('item.mainCategoryId', 'hm')}
-                        >ÜMLAUT</a>
+                        >
+                            <img className='py-2 w-[100px] h-auto' src={navIMG} alt="" />
+                        </a>
                     </div>
                     <div className='flex justify-between'>
                         <ul className='Mobile my-ul z-30 hidden absolute right-[0px]  h-[100vh] md:bg-transparent bg-[white] w-[100%] md:w-auto md:h-auto p-3 md:py-3 md:text-base md:relative md:flex space-x-5'>
@@ -161,22 +165,33 @@ export default function Navbar() {
                                     )
                                 })
                             }
+                            <li className='md:hidden block '>
+                                <button
+                                    onClick={logout}
+                                    className='text-red-500 text-lg block'>logout</button>
+                            </li>
                             <li>
                                 <div className='block md:hidden mt-5 left-[10px] '>
                                     <div className="flex">
-                                        <b
-                                            onClick={() => navigetTo('item.mainCategoryId', 'login')}
-                                            className='text-sm px-1 flex cursor-pointer' >
-                                            <FaUserAlt className='mx-1' />
-                                            {
-                                                userInfo ? (
-                                                    <span className=''>{userInfo?.user?.firstName}</span>
-                                                ) : (
+                                        {
+                                            userInfo ? (
+                                                <b
+                                                    className='logout text-sm px-2 relative' >
+                                                    <div className='flex cursor-pointer'>
+                                                        <FaUserAlt className='mx-2' />
+                                                        <button onClick={openProfile}
+                                                            className='block'>Profile
+                                                        </button>
+                                                    </div>
+                                                </b>
+                                            ) : (
+                                                <b onClick={() => navigetTo('item.mainCategoryId', 'login')}
+                                                    className='text-sm px-2 flex cursor-pointer' >
+                                                    <FaUserAlt className='mx-2' />
                                                     <span className=''>Sign In</span>
-                                                )
-                                            }
-
-                                        </b>
+                                                </b>
+                                            )
+                                        }
                                         <b
                                             onClick={() => navigetTo('item.mainCategoryId', 'cart')}
                                             className='text-sm px-1 flex cursor-pointer'>

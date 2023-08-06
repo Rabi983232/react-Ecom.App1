@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import { fetchNavItems } from '../features/navreducer/navreducer';
 import { fetchProducts } from '../features/productreducer/productSlice';
 // import 'react-confirm-alert/src/ReactConfirmAlert.css'
+import swal from 'sweetalert'
 
 export default function Conformation() {
     const [removeClass, setRemovableClass] = useState('info')
@@ -42,27 +43,39 @@ export default function Conformation() {
                 localStorage.removeItem('payableAmount')
                 localStorage.removeItem('ADD_Cart_ID')
                 localStorage.removeItem('addressId')
-                confirmAlert({
-                    title: 'Order placed success',
-                    message: 'Press `ok` to return to home page.',
-                    buttons: [
-                        {
-                            label: 'ok',
-                            onClick: () => {
-                                dispetch(fetchProducts())
-                                const re = dispetch(fetchNavItems())
-                                Promise.all([re]).then((res) => {
-                                    publicRequest.post(`cartMaster`, { 'userId': userId.user.userId }).then((response) => {
-                                        const atcid = localStorage.setItem(`ADD_Cart_ID`, JSON.stringify(response?.data));
-                                        Promise.all([atcid]).then(() => {
-                                            navigate(`/`)
-                                        })
-                                    })
-                                })
-                            }
-                        }
-                    ]
-                });
+                swal('Order placed success').then((val)=>{
+                    dispetch(fetchProducts())
+                    const re = dispetch(fetchNavItems())
+                    Promise.all([re]).then((res) => {
+                        publicRequest.post(`cartMaster`, { 'userId': userId.user.userId }).then((response) => {
+                            const atcid = localStorage.setItem(`ADD_Cart_ID`, JSON.stringify(response?.data));
+                            Promise.all([atcid]).then(() => {
+                                navigate(`/`)
+                            })
+                        })
+                    })
+                })
+                // confirmAlert({
+                //     title: 'Order placed success',
+                //     message: 'Press `ok` to return to home page.',
+                //     buttons: [
+                //         {
+                //             label: 'ok',
+                //             onClick: () => {
+                //                 dispetch(fetchProducts())
+                //                 const re = dispetch(fetchNavItems())
+                //                 Promise.all([re]).then((res) => {
+                //                     publicRequest.post(`cartMaster`, { 'userId': userId.user.userId }).then((response) => {
+                //                         const atcid = localStorage.setItem(`ADD_Cart_ID`, JSON.stringify(response?.data));
+                //                         Promise.all([atcid]).then(() => {
+                //                             navigate(`/`)
+                //                         })
+                //                     })
+                //                 })
+                //             }
+                //         }
+                //     ]
+                // });
             }
         })
 

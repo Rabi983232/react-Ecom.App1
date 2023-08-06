@@ -10,7 +10,7 @@ import FilterSideBar from '../components/FilterSideBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNavItems } from '../features/navreducer/navreducer';
-import { fetchFilterData } from '../features/filter/filterReducer';
+import { fetchFilterData, fetchFilteredSizes } from '../features/filter/filterReducer';
 import { fetchProductsByCategory, fetchProducts, fetchProductsByCategoryAndP_id, fetchFilterProduct } from '../features/productreducer/productSlice';
 import { ScaleLoader } from 'react-spinners';
 
@@ -26,14 +26,16 @@ export default function Categorypage() {
         showFilterF(isOpen)
     }
 
-
     useEffect(() => {
+        dispetch(fetchFilterProduct({
+            mainCategoryId: path[2],
+        }))
         dispetch(fetchFilterData(path[2]))
+        dispetch(fetchFilteredSizes(path[2]))
         dispetch(fetchProductsByCategory(path[2]))
         dispetch(fetchNavItems())
         dispetch(fetchProducts())
     }, [dispetch, path[2]])
-    const filterData = useSelector(state => state.filterData)
     const data = useSelector(state => state.navItems)
     var myCls = 'prdcl'
 
@@ -49,12 +51,7 @@ export default function Categorypage() {
             navigate(`/product/${C_id}/${P_id}`)
         })
     }
-
-    useEffect(() => {
-        dispetch(fetchFilterProduct({
-            mainCategoryId: path[2],
-        }))
-    }, [dispetch, path[2]])
+    const filterData = useSelector(state => state.filterData)
 
     const returnToHom = () => {
         dispetch(fetchProducts())
@@ -63,9 +60,7 @@ export default function Categorypage() {
             navigate(`/`)
         })
     }
-    useEffect(()=>{},[filterData])
     const p_by_c_data = useSelector(state => state.products.filteredProducts)
-    console.log(filterData)
     return (
         <>
             <div className='w-[100%] relative'>
@@ -82,9 +77,9 @@ export default function Categorypage() {
                         <div className='flex justify-between p-4'>
                             <div>
                                 <span className='md:block hidden'>Filter</span>
-                                <div className='filterBtn md:hidden bg-white cursor-pointer z-20 fixed'>
-                                    <TbAdjustmentsHorizontal fill='orange' color='orange' onClick={showFilter} size={55}
-                                        className='px-2 pt-[-50px]' />
+                                <div className='filterBtn md:hidden bg-[orange] cursor-pointer z-20 fixed'>
+                                    <TbAdjustmentsHorizontal fill='white' color='white' onClick={showFilter} size={55}
+                                        className='px-2 pt-[-40px]' />
                                 </div>
                             </div>
                             <div className='md:flex hidden text-sm'>
@@ -102,11 +97,17 @@ export default function Categorypage() {
                         <div className='w-[100%] md:w-[98%] mx-auto h-auto flex'>
                             {
                                 filterData.isLoding == false ?
-                                    <FilterSideBar
-                                        cat_Id={path[2]}
-                                        setColors={setColors}
-                                        // filteredData={filteredData}
-                                        filterData={filterData.items} />
+                                    filterData.items.length == 0 ? (
+                                        null
+                                    ) : (
+                                        <FilterSideBar
+                                            cat_Id={path[2]}
+                                            setColors={setColors}
+                                            // filteredData={filteredData}
+                                            sizesss={filterData.sizes}
+                                            filterData={filterData.items} />
+                                    )
+
                                     : null
                             }
                             <div className='w-[100%]'>

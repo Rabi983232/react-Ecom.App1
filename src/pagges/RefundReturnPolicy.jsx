@@ -3,10 +3,17 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { FcCollapse } from "react-icons/fc";
 import MyCollaps from '../components/MyCollaps';
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchNavItems } from '../features/navreducer/navreducer';
+import { useEffect } from 'react';
 
 
 export default function RefundReturnPolicy() {
     const arrr = [1, 2, 3, 4, 5];
+    const dispetch = useDispatch()
+    useEffect(() => {
+        dispetch(fetchNavItems())
+    }, [])
 
     return (
         <div className='w-[100%]'>

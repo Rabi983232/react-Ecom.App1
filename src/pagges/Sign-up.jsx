@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import img1 from '../assets/iamges/signup-img.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { checkUserData } from './events'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { publicRequest } from '../axios/axios'
+import swal from 'sweetalert';
 
 
 export default function Sign_up() {
+    const navigate = useNavigate()
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
@@ -29,10 +31,13 @@ export default function Sign_up() {
                 publicRequest.post(`users`, userData)
                     .then((res) => {
                         if (res.data.status == '200') {
-                            toast.success(res.data.msg, { theme: "colored", position: "top-left" })
+                            swal("Good job!",'your registered successfully', "success");
+                            // toast.success(res.data.msg, { theme: "colored", position: "top-left" })
                         }
                         if (res.data.status == '400') {
-                            toast.info(res.data.msg, { theme: "colored", position: "top-left" })
+                            swal("Opps!",res.data.msg, "info").then(()=>{
+                                navigate('/login');
+                            })
                         }
                     })
             }

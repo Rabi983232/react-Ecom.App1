@@ -16,8 +16,7 @@ import { fetchProducts, fetchProductsByCategory, fetchProductsByCategoryAndP_id 
 import { fetchBannerImages } from '../features/Banner/BannerReducer'
 import { ScaleLoader } from 'react-spinners';
 import { publicRequest } from '../axios/axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import swal from 'sweetalert';
 
 export default function Product() {
     const [price, setPrice] = useState()
@@ -56,17 +55,9 @@ export default function Product() {
     }
     const addTocart = () => {
         if (size == undefined) {
-            toast.warning('please choose a size', { theme: "colored", position: "top-center" })
+            swal("Oops!", "please choose a size!", "warning");
         } else {
             const productData = JSON.parse(localStorage.getItem(`productData`))
-            // console.log({
-            //     'productData': productData.productId,
-            //     'image': image,
-            //     'quentity': quentity,
-            //     'color': color,
-            //     'size': size,
-            //     'price': price * quentity
-            // })
             const userInfo = JSON.parse(localStorage.getItem(`user_Data`))
             const cart_id = JSON.parse(localStorage.getItem(`ADD_Cart_ID`))
             // console.log(cart_id)
@@ -88,11 +79,11 @@ export default function Product() {
                         }).then((respon) => {
                             console.log(respon)
                             if (respon.data.status == 200) {
-                                toast.success(respon.data.msg, { theme: "colored", position: "top-center" })
+                                swal("Good job!", respon.data.msg, "success");
                                 setreRender(rerender + 1)
                             }
                             if (respon.data.status == 400) {
-                                toast.info(respon.data.msg, { theme: "colored", position: "top-center" })
+                                swal("Oops!", 'This product already exists in your cart', "info");
                             }
                             Toggle('add')
                         })
@@ -184,8 +175,81 @@ const Products = ({
     useEffect(() => {
 
     }, [rerender])
+    const [showEnq,setShowENQ] = useState('hidden');
     return (
         <div className='w-[100%]'>
+            <div onClick={()=> setShowENQ('hidden')} className={`fixed ${showEnq} z-[5000] w-[100%] h-[100%] bg-[rgba(0,0,0,0.5)]`}>
+                <div onClick={()=> setShowENQ('hidden')} className='w-[100%] h-[100%] relative'>
+                    <div className='modalbody w-[95%] md:w-[60%] h-auto md:h-[80%] bg-white rounded p-2'>
+                        <div className='text-center p-2 text-2xl font-bold'>ENQUIRY FOR BULK ORDER</div>
+                        <div className='w-[100%] md:w-[85%] h-[85%] md:h-[90%] mx-auto'>
+                            <div className='flex flex-wrap my-6 text-xs md:text-base justify-around'>
+                                <div className='w-[46%]  h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Name :</label>
+                                    </div>
+                                    <div>
+                                        <input className='w-[100%] md:h-[50px] h-[30px] bg-[#eee]' type="text" id="" name="name" />
+                                    </div>
+                                </div>
+                                <div className='w-[46%]  h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Email Id :</label>
+                                    </div>
+                                    <div>
+                                        <input className='w-[100%] md:h-[50px] h-[30px] bg-[#eee]' type="text" id="" name="name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-wrap my-6 justify-around'>
+                                <div className='w-[46%] text-xs md:text-base h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Mobile No.:</label>
+                                    </div>
+                                    <div>
+                                        <input className='w-[100%] md:h-[50px] h-[30px] bg-[#eee]' type="text" id="" name="name" />
+                                    </div>
+                                </div>
+                                <div className='w-[46%] text-xs md:text-base h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Logo Customization required ? :</label>
+                                    </div>
+                                    <div className='flex justify-start md:h-[50px] h-[30px] gap-3'>
+                                        <div>
+                                            <input className='px-4 bg-[#eee]' type="radio" id="" name="name" />Yes
+                                        </div>
+                                        <div>
+                                            <input className='px-4 bg-[#eee]' type="radio" id="" name="name" />No
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-wrap my-6 text-xs md:text-base justify-around'>
+                                <div className='w-[46%] h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Name :</label>
+                                    </div>
+                                    <div>
+                                        <input className='w-[100%] md:h-[50px] h-[30px] bg-[#eee]' type="text" id="" name="name" />
+                                    </div>
+                                </div>
+                                <div className='w-[46%] h-auto'>
+                                    <div>
+                                        <label className='' htmlFor="name">Name :</label>
+                                    </div>
+                                    <div>
+                                        <input className='w-[100%] md:h-[50px] h-[30px] bg-[#eee]' type="text" id="" name="name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='p-8 text-white'>
+                                <button className='p-2 bg-[rgba(21,39,66,1)] rounded-xl'>ENQUIRE NOW</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <Navbar data={data} />
             <div className='my-[50px]'>
                 {/* <button className='mb-5 px-5 bg-[#f7f5f7]'>
@@ -275,7 +339,7 @@ const Products = ({
                                                     className='w-[200px] p-2 rounded-full text-white bg-[rgba(21,39,66,1)]'>Add To Cart</button>
                                             </div>
                                         </div>
-                                        <div className='m-6 font-bold underline'>ENQUIRY FOR BULK ORDER </div>
+                                        <div onClick={()=> setShowENQ('block')} className='m-6 cursor-pointer font-bold underline'>ENQUIRY FOR BULK ORDER </div>
                                         <hr className='bg-gray-400 my-2 mx-auto w-[97%]' />
                                     </div>
                                     <div className='w-[100%]'>
@@ -379,7 +443,6 @@ const Products = ({
                     </div>
                 </div>
             </div>
-            <ToastContainer position="top-left" theme="colored" />
             <Footer />
         </div>
     )

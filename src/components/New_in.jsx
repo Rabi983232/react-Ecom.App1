@@ -4,7 +4,7 @@ export default function New_in() {
     return (
         <>
             <div className='w-[100%] h-auto mt-[30px] md:mt-[70px] mb-[75px] md:mb-[150px] relative'>
-                <div className='w-[100%] h-[600px] opacity-[-1] bg-white absolute'>
+                <div className='w-[100%] h-auto md:h-[400px] opacity-[-1] bg-white absolute'>
 
                 </div>
                 <div className='w-[80%] mb-[40px] m-auto h-auto flex place-content-center'>

@@ -26,9 +26,9 @@ const BannerM = () => {
             {
                 banners.isLoding == false ? (
                     <div className='w-[100%] h-auto'>
-                        <div className={` w-[100%] h-[300px] md:h-[50vh] lg:h-[70vh] xl:h-[90vh] relative flex justify-around`}>
-                            <div className='absolute z-10 w-[90%] md:mt-[90px] mt-[10px]'>
-                                <div className='w-[50%] m-0 flex md:text-[20px] lg:text-[30px] text-xl text-white font-semibold font-[sans-serif]'>
+                        <div className={` w-[100%] h-[200px] md:h-[50vh] lg:h-[70vh] xl:h-[90vh] relative flex justify-around`}>
+                            <div className='absolute z-10 w-[90%] md:mt-[90px] mt-[10px] borde'>
+                                <div className='w-[100%] m-0 flex md:text-[20px] lg:text-[30px] text-sm text-white font-semibold font-[sans-serif]'>
                                     <span className=' p-2'>
                                         EVERYTHING IN ONE PLACE.
                                     </span>
@@ -38,7 +38,7 @@ const BannerM = () => {
                                 src={BiglBanner[0].bigimage}
                                 alt="Banner.png" srcset="" />
                         </div>
-                        <div className='w-[80%] h-auto md:h-[400px] m-auto md:mt-[-150px] mt-[-70px] md:mb-[50px] relative'>
+                        <div className='w-[80%] h-auto md:h-[400px] m-auto md:mt-[-150px] mt-[-50px] md:mb-[50px] relative'>
                             <Swiper
                                 spaceBetween={0}
                                 slidesPerView={1}
@@ -59,10 +59,10 @@ const BannerM = () => {
                                         return (
                                             <>
                                                 <SwiperSlide key={i}>
-                                                    <div className='w-[100%] h-[150px] md:h-[400px] flex justify-between'>
+                                                    <div className='w-[100%] h-[130px] md:h-[400px] flex justify-between'>
                                                         <div className='w-[5%] h-[100%] bg-white'>
                                                             <div className='w-[100%] h-[100%]'>
-                                                                <BsArrowLeft className='text-xl md:text-2xl md:m-4 md:mt-[160px] mt-[100px]' />
+                                                                <BsArrowLeft className='text-xl md:text-2xl md:m-4 md:mt-[160px] mt-[50px]' />
                                                             </div>
                                                         </div>
                                                         <div className='w-[95%] h-[100%] flex justify-between'>

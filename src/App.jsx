@@ -1,7 +1,8 @@
-import React ,{useEffect}from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { btnTop, scrollTop } from './pagges/events';
 import { RRoute } from './Route';
+import { BsChevronDoubleUp } from "react-icons/bs";
 
 
 
@@ -16,7 +17,9 @@ export default function App() {
           }
         </Routes>
       </BrowserRouter>
-      <button onClick={scrollTop} className='scrollTop'>Scroll Top</button>
+      <button onClick={scrollTop} className='scrollTop'>
+        <BsChevronDoubleUp />
+      </button>
     </div>
   )
 }

@@ -2,34 +2,48 @@ import React, { useEffect, useState } from 'react'
 import { hideFilter } from '../pagges/events'
 import { useDispatch } from 'react-redux'
 import { fetchFilterProduct } from '../features/productreducer/productSlice';
-// import { publicRequest } from '../axios/axios';
 
-export default function FilterSideBar({ filterData, cat_Id }) {
+export default function FilterSideBar({ filterData, cat_Id, sizesss }) {
     // const [fcolors, setFcolors] = useState()
-    // var checkData = []
+    const [sizeR, setSizesR] = useState()
     const dispetch = useDispatch()
     const [removeClass, setRemovableClass] = useState()
     const [price, setPrice] = useState(filterData.price.maxPrice)
-
-    // console.log(colors)
     const [selectedSize, setselectedSize] = useState([]);
     const handleSize = (index, data) => {
         setRemovableClass(index)
-        if (index == removeClass) {
-            const remoClass = document.getElementsByClassName(removeClass);
-            remoClass[0].classList.remove(`selectedSize`);
-            setRemovableClass('')
-            setselectedSize((current) =>
-                current.filter((size) => size !== data)
-            );
+        if (selectedSize.length > 0) {
+            const dfg = selectedSize.find(res => res == data)
+            if (dfg !== undefined) {
+                setselectedSize((current) =>
+                    current.filter((size) => size !== data)
+                );
+                const addClass = document.getElementsByClassName(index);
+                addClass[0].classList.remove(`selectedSize`);
+                setRemovableClass('')
+            } else {
+                const addClass = document.getElementsByClassName(index);
+                addClass[0].classList.add("selectedSize");
+                setselectedSize(current => [...current, data]);
+            }
         } else {
-            const addClass = document.getElementsByClassName(index);
-            addClass[0].classList.add("selectedSize");
-            setselectedSize(current => [...current, data]);
+            if (index == removeClass) {
+                const addClass = document.getElementsByClassName(index);
+                addClass[0].classList.remove(`selectedSize`);
+                setselectedSize((current) =>
+                    current.filter((size) => size !== data)
+                );
+                setRemovableClass('')
+            } else {
+                const addClass = document.getElementsByClassName(index);
+                addClass[0].classList.add("selectedSize");
+                setselectedSize(current => [...current, data]);
+            }
         }
     }
 
     // let selectedColors = []
+    console.log(filterData)
 
     const [selectedColors, setselectedColors] = useState([]);
 
@@ -56,7 +70,7 @@ export default function FilterSideBar({ filterData, cat_Id }) {
             }
         }
     }
-    useEffect(() => { }, [filterData])
+    console.log(sizeR)
     const apply = () => {
         hideFilter('Apply')
         if (selectedColors.length > 0) {
@@ -103,13 +117,11 @@ export default function FilterSideBar({ filterData, cat_Id }) {
         }
 
     }
-
-
-
-    // const callDispatch = () => {
-
-    //     dispetch(fetchFilterProduct())
-    // }
+    useEffect(() => {
+        setPrice(filterData.price.maxPrice)
+        setselectedColors([])
+        setselectedSize([])
+    }, [filterData, cat_Id])
 
     const pColor = filterData.colors.map((cl) => {
         return (
@@ -120,35 +132,13 @@ export default function FilterSideBar({ filterData, cat_Id }) {
         <>
             <div className='md:block hidden md:w-[30%] filterContainer'>
                 <div className='w-[100%]  bg-[#f7f5f7] h-auto border mr-1'>
-                    {/* <div>
-                        <div className='w-[80%] gender border-b-slate-400 mx-auto pt-2 '>
-                            <div className='text-lg font-semibold'>Gender</div>
-                        </div>
-                        <div className={`h-auto mx-8 p-3 overflow-hidden`}>
-                            {
-                                filterData.genders?.map((item) => {
-                                    console.log(item)
-                                    return (
-                                        <>
-                                            <input
-                                                className='m-1'
-                                                type="checkbox"
-                                                name="" id=""
-                                                onChange={() => filteredData('gender')}
-                                            /> <span>{item.genderName}</span> < br />
-                                        </>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div> */}
                     <div>
                         <div className='w-[80%] gender border-b-slate-400 mx-auto pt-2 '>
                             <div className='text-lg font-semibold'>Size</div>
                         </div>
                         <div className={`genderItem text-xs py-4 mx-8 h-auto overflow-hidden`}>
                             {
-                                filterData.sizes?.map((item, index) => {
+                                sizesss?.map((item, index) => {
                                     return (
                                         <button
                                             onClick={() => handleSize(`size${index}`, item.productSizeCodeId)}
@@ -164,13 +154,13 @@ export default function FilterSideBar({ filterData, cat_Id }) {
                         </div>
                         <div className={`w-[100%]h-auto mx-8 p-3 overflow-hidden`}>
                             {
-                                pColor?.map((color) => {
+                                pColor?.map((color, index) => {
                                     return (
                                         <>
                                             <input
                                                 onChange={() => filteredData('color', color[0])}
-                                                className='m-1' type="checkbox" name="color" id="" />
-                                            <span className={`font-[bold]`}>{color[1]}</span> < br />
+                                                className='m-1' type="checkbox" name="color" id="ischecked" />
+                                            <span key={index} className={`font-[bold]`}>{color[1]}</span> < br />
                                         </>
                                     )
                                 })

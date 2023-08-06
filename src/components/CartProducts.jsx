@@ -4,7 +4,7 @@ import { publicRequest } from '../axios/axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNavItems } from '../features/navreducer/navreducer'
 import { fetchCartItems } from '../features/cart/cartReducer'
-
+import swal from 'sweetalert'
 import { Link } from 'react-router-dom';
 import { fetchCouponList } from '../features/coupon/counpon'
 
@@ -108,7 +108,8 @@ const CartProducts = ({ reRender, setReRender, ggg, ggg2, QNTTs, arr, from }) =>
             if (res.data.data.length > 0) {
                 dispatch(fetchCouponList(couponCode))
             } else {
-                alert('Coupon Code is invalid')
+                // alert('   ')
+                swal("Oops!", "Coupon Code is invalid!", "error");
             }
         })
     }

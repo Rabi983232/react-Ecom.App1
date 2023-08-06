@@ -6,8 +6,15 @@ import img2 from '../assets/iamges/about-us/icon-1.png'
 import img3 from '../assets/iamges/about-us/icon-2.png'
 import img4 from '../assets/iamges/about-us/icon-3.png'
 import { changeSecsion } from './events'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchNavItems } from '../features/navreducer/navreducer';
+import { useEffect } from 'react';
 
 export default function About() {
+    const dispetch = useDispatch()
+    useEffect(() => {
+        dispetch(fetchNavItems())
+    }, [])
     const [removeClass, setRemovableClass] = useState('sec-1')
     const handleChange = (classs) => {
         setRemovableClass(classs)
